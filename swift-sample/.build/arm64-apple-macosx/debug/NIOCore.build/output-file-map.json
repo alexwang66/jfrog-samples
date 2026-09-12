@@ -1,0 +1,306 @@
+{
+  "": {
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/primary.swiftdeps"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/AddressedEnvelope.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/AddressedEnvelope.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/AddressedEnvelope.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/AddressedEnvelope~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/AddressedEnvelope.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/AddressedEnvelope.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/BSDSocketAPI.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/BSDSocketAPI.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/BSDSocketAPI.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/BSDSocketAPI~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/BSDSocketAPI.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/BSDSocketAPI.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ByteBuffer-aux.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-aux.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-aux.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-aux~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-aux.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-aux.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ByteBuffer-conversions.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-conversions.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-conversions.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-conversions~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-conversions.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-conversions.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ByteBuffer-core.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-core.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-core.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-core~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-core.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-core.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ByteBuffer-int.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-int.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-int.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-int~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-int.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-int.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ByteBuffer-lengthPrefix.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-lengthPrefix.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-lengthPrefix.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-lengthPrefix~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-lengthPrefix.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-lengthPrefix.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ByteBuffer-views.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-views.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-views.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-views~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-views.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ByteBuffer-views.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/Channel.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Channel.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Channel.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Channel~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Channel.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Channel.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ChannelHandler.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandler.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandler.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandler.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandler.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ChannelHandlers.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandlers.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandlers.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandlers~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandlers.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelHandlers.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ChannelInvoker.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelInvoker.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelInvoker.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelInvoker~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelInvoker.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelInvoker.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ChannelOption.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelOption.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelOption.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelOption~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelOption.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelOption.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ChannelPipeline.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelPipeline.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelPipeline.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelPipeline~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelPipeline.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ChannelPipeline.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/CircularBuffer.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/CircularBuffer.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/CircularBuffer.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/CircularBuffer~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/CircularBuffer.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/CircularBuffer.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/Codec.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Codec.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Codec.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Codec~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Codec.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Codec.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/ConvenienceOptionSupport.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ConvenienceOptionSupport.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ConvenienceOptionSupport.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ConvenienceOptionSupport~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ConvenienceOptionSupport.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/ConvenienceOptionSupport.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/DeadChannel.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DeadChannel.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DeadChannel.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DeadChannel~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DeadChannel.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DeadChannel.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/DispatchQueue+WithFuture.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DispatchQueue+WithFuture.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DispatchQueue+WithFuture.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DispatchQueue+WithFuture~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DispatchQueue+WithFuture.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/DispatchQueue+WithFuture.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/EventLoop.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoop.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoop.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoop~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoop.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoop.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/EventLoopFuture.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoopFuture.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoopFuture.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoopFuture~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoopFuture.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/EventLoopFuture.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/FileDescriptor.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileDescriptor.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileDescriptor.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileDescriptor~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileDescriptor.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileDescriptor.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/FileHandle.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileHandle.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileHandle.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileHandle~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileHandle.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileHandle.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/FileRegion.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileRegion.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileRegion.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileRegion~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileRegion.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/FileRegion.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/IO.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IO.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IO.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IO~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IO.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IO.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/IOData.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IOData.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IOData.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IOData~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IOData.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IOData.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/IntegerBitPacking.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerBitPacking.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerBitPacking.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerBitPacking~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerBitPacking.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerBitPacking.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/IntegerTypes.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerTypes.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerTypes.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerTypes.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/IntegerTypes.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/Interfaces.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Interfaces.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Interfaces.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Interfaces~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Interfaces.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Interfaces.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/Linux.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Linux.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Linux.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Linux~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Linux.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Linux.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/MarkedCircularBuffer.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MarkedCircularBuffer.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MarkedCircularBuffer.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MarkedCircularBuffer~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MarkedCircularBuffer.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MarkedCircularBuffer.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/MulticastChannel.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MulticastChannel.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MulticastChannel.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MulticastChannel~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MulticastChannel.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/MulticastChannel.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/NIOAny.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOAny.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOAny.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOAny~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOAny.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOAny.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/NIOCloseOnErrorHandler.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOCloseOnErrorHandler.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOCloseOnErrorHandler.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOCloseOnErrorHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOCloseOnErrorHandler.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/NIOCloseOnErrorHandler.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/PointerHelpers.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/PointerHelpers.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/PointerHelpers.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/PointerHelpers~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/PointerHelpers.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/PointerHelpers.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/RecvByteBufferAllocator.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/RecvByteBufferAllocator.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/RecvByteBufferAllocator.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/RecvByteBufferAllocator~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/RecvByteBufferAllocator.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/RecvByteBufferAllocator.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/SingleStepByteToMessageDecoder.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SingleStepByteToMessageDecoder.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SingleStepByteToMessageDecoder.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SingleStepByteToMessageDecoder~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SingleStepByteToMessageDecoder.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SingleStepByteToMessageDecoder.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/SocketAddresses.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketAddresses.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketAddresses.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketAddresses~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketAddresses.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketAddresses.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/SocketOptionProvider.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketOptionProvider.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketOptionProvider.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketOptionProvider~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketOptionProvider.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SocketOptionProvider.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/SystemCallHelpers.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SystemCallHelpers.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SystemCallHelpers.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SystemCallHelpers~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SystemCallHelpers.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/SystemCallHelpers.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/TypeAssistedChannelHandler.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/TypeAssistedChannelHandler.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/TypeAssistedChannelHandler.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/TypeAssistedChannelHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/TypeAssistedChannelHandler.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/TypeAssistedChannelHandler.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/UniversalBootstrapSupport.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/UniversalBootstrapSupport.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/UniversalBootstrapSupport.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/UniversalBootstrapSupport~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/UniversalBootstrapSupport.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/UniversalBootstrapSupport.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOCore/Utilities.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Utilities.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Utilities.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Utilities~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Utilities.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOCore.build/Utilities.dia"
+  }
+}

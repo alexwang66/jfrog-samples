@@ -1,0 +1,4 @@
+module CNIOSHA1 {
+    umbrella header "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/CNIOSHA1/include/CNIOSHA1.h"
+    export *
+}

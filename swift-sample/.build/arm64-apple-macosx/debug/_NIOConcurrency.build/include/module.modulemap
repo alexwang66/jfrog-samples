@@ -1,0 +1,3 @@
+module _NIOConcurrency {
+    header "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/_NIOConcurrency.build/include/_NIOConcurrency-Swift.h"
+}

@@ -1,0 +1,3 @@
+module NIOTestUtils {
+    header "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOTestUtils.build/include/NIOTestUtils-Swift.h"
+}

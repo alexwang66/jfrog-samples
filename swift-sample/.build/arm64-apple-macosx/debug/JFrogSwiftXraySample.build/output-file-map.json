@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/JFrogSwiftXraySample.build/primary.swiftdeps"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/Sources/JFrogSwiftXraySample/main.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/JFrogSwiftXraySample.build/main.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/JFrogSwiftXraySample.build/main.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/JFrogSwiftXraySample.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/JFrogSwiftXraySample.build/main.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/JFrogSwiftXraySample.build/main.dia"
+  }
+}

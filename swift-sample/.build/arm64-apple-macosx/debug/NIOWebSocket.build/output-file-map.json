@@ -1,0 +1,82 @@
+{
+  "": {
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/primary.swiftdeps"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/Base64.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/Base64.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/Base64.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/Base64~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/Base64.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/Base64.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/NIOWebSocketClientUpgrader.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketClientUpgrader.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketClientUpgrader.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketClientUpgrader~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketClientUpgrader.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketClientUpgrader.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/NIOWebSocketFrameAggregator.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketFrameAggregator.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketFrameAggregator.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketFrameAggregator~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketFrameAggregator.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketFrameAggregator.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/NIOWebSocketServerUpgrader.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketServerUpgrader.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketServerUpgrader.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketServerUpgrader~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketServerUpgrader.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/NIOWebSocketServerUpgrader.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/SHA1.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/SHA1.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/SHA1.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/SHA1~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/SHA1.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/SHA1.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/WebSocketErrorCodes.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketErrorCodes.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketErrorCodes.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketErrorCodes~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketErrorCodes.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketErrorCodes.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/WebSocketFrame.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrame.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrame.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrame~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrame.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrame.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/WebSocketFrameDecoder.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameDecoder.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameDecoder.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameDecoder~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameDecoder.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameDecoder.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/WebSocketFrameEncoder.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameEncoder.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameEncoder.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameEncoder~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameEncoder.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketFrameEncoder.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/WebSocketOpcode.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketOpcode.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketOpcode.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketOpcode~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketOpcode.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketOpcode.dia"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIOWebSocket/WebSocketProtocolErrorHandler.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketProtocolErrorHandler.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketProtocolErrorHandler.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketProtocolErrorHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketProtocolErrorHandler.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOWebSocket.build/WebSocketProtocolErrorHandler.dia"
+  }
+}

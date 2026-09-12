@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIO.build/primary.swiftdeps"
+  },
+  "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/registry/downloads/apple/swift-nio/2.32.0/Sources/NIO/Exports.swift": {
+    "dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIO.build/Exports.d",
+    "object": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIO.build/Exports.swift.o",
+    "swiftmodule": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIO.build/Exports~partial.swiftmodule",
+    "swift-dependencies": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIO.build/Exports.swiftdeps",
+    "diagnostics": "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIO.build/Exports.dia"
+  }
+}
