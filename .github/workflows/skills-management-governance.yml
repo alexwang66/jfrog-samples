@@ -77,7 +77,7 @@ jobs:
         if: steps.skills.outputs.has_skills == 'true'
         env:
           JF_URL: ${{ secrets.JF_URL || vars.JFROG_URL }}
-          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN || secrets.ARTIFACTORY_ACCESS_TOKEN }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN || secrets.RUNTIME_ARTIFACTORY_ACCESS_TOKEN || secrets.ARTIFACTORY_ACCESS_TOKEN }}
         run: |
           set -euo pipefail
           if [ -z "${JF_URL:-}" ]; then
@@ -86,7 +86,7 @@ jobs:
           fi
 
           if [ -z "${JF_ACCESS_TOKEN:-}" ]; then
-            echo "::error::Missing JFrog access token. Set repo secret ARTIFACTORY_ACCESS_TOKEN or JF_ACCESS_TOKEN."
+            echo "::error::Missing JFrog access token. Set repo secret RUNTIME_ARTIFACTORY_ACCESS_TOKEN, ARTIFACTORY_ACCESS_TOKEN, or JF_ACCESS_TOKEN."
             exit 1
           fi
 
