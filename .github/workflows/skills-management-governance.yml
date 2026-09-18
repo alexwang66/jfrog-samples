@@ -1,0 +1,120 @@
+name: Publish and Authorize Skills
+
+on:
+  push:
+    paths:
+      - "skills-management-flow/develop/**"
+      - "skills-management-flow/scripts/**"
+      - ".github/workflows/skills-management-governance.yml"
+  workflow_dispatch:
+    inputs:
+      skill_path:
+        description: "Skill folder to publish, for example skills-management-flow/develop/customer-support. Leave empty to process all develop skills."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: skills-management-governance-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish-scan-and-authorize:
+    name: Publish to JFrog, scan, then authorize
+    runs-on: ubuntu-latest
+    env:
+      JFROG_SKILLS_REPO: alex-skills-local
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+
+      - name: Resolve changed skills
+        id: skills
+        env:
+          SKILL_PATH: ${{ github.event.inputs.skill_path || '' }}
+          BEFORE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          skill_dirs="$(bash skills-management-flow/scripts/list-skill-dirs.sh)"
+
+          if [ -z "$skill_dirs" ]; then
+            echo "has_skills=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "has_skills=true" >> "$GITHUB_OUTPUT"
+          {
+            echo "skill_dirs<<EOF"
+            echo "$skill_dirs"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Validate skill metadata
+        if: steps.skills.outputs.has_skills == 'true'
+        run: |
+          set -euo pipefail
+          printf '%s\n' '${{ steps.skills.outputs.skill_dirs }}' | while IFS= read -r skill_dir; do
+            [ -n "$skill_dir" ] || continue
+            bash skills-management-flow/scripts/validate-skill.sh "$skill_dir"
+          done
+
+      - name: Configure JFrog CLI
+        if: steps.skills.outputs.has_skills == 'true'
+        env:
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$JF_URL"
+          test -n "$JF_ACCESS_TOKEN"
+          jf config add skills-registry \
+            --url "$JF_URL" \
+            --access-token "$JF_ACCESS_TOKEN" \
+            --interactive=false \
+            --overwrite=true
+
+      - name: Publish to JFrog skills registry and wait for scan gate
+        if: steps.skills.outputs.has_skills == 'true'
+        run: |
+          set -euo pipefail
+          printf '%s\n' '${{ steps.skills.outputs.skill_dirs }}' | while IFS= read -r skill_dir; do
+            [ -n "$skill_dir" ] || continue
+
+            validation_output="$(bash skills-management-flow/scripts/validate-skill.sh "$skill_dir")"
+            skill_name="$(printf '%s\n' "$validation_output" | awk -F= '/^SKILL_NAME=/{print $2}')"
+            skill_version="$(printf '%s\n' "$validation_output" | awk -F= '/^SKILL_VERSION=/{print $2}')"
+
+            echo "Publishing ${skill_name}@${skill_version} to ${JFROG_SKILLS_REPO}"
+            jf skills publish "$skill_dir" \
+              --server-id skills-registry \
+              --repo "$JFROG_SKILLS_REPO" \
+              --version "$skill_version" \
+              --auto-delete-on-failure \
+              --quiet
+
+            bash skills-management-flow/scripts/promote-approved-skill.sh "$skill_dir"
+          done
+
+      - name: Commit authorized skills
+        if: steps.skills.outputs.has_skills == 'true'
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- skills-management-flow/authorized; then
+            echo "No authorized skill changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skills-management-flow/authorized
+          git commit -m "Authorize scanned skills"
+          git push
