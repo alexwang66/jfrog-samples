@@ -59,6 +59,25 @@ npm run pipeline:local
 
 Run the automated checks with `npm test`.
 
+## Publish to `alex-skills-local` from GitHub Actions
+
+The GitHub Actions workflow validates every push and deliberately publishes only
+when started manually. This prevents an unreviewed branch commit from becoming a
+new immutable registry version.
+
+Before running the publish job, create a GitHub Environment named
+`jfrog-skills-publish` and add these environment secrets:
+
+- `JF_URL`: the JFrog Platform URL, for example `https://company.jfrog.io`.
+- `JF_ACCESS_TOKEN`: a scoped service-account token with deploy permission only
+  for `alex-skills-local`.
+
+Then open **Actions > Validate Skills Governance Webhook Demo > Run workflow**,
+set **Publish customer-support...** to true, and enter a new semantic version.
+The workflow runs `jf skills publish` against `alex-skills-local`; that command
+waits for its synchronous Xray scan and fails the job if the scan gate blocks the
+skill. Never re-use a published version.
+
 ## Connect it to JFrog and Git
 
 1. Create an Artifactory **Skills** repository and enable Xray indexing.

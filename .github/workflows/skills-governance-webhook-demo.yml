@@ -10,6 +10,17 @@ on:
       - 'skills-governance-webhook-demo/**'
       - '.github/workflows/skills-governance-webhook-demo.yml'
   workflow_dispatch:
+    inputs:
+      publish_to_jfrog:
+        description: 'Publish customer-support to alex-skills-local and run its synchronous Xray scan'
+        required: true
+        type: boolean
+        default: false
+      skill_version:
+        description: 'Immutable semantic version to publish'
+        required: true
+        type: string
+        default: '1.0.0'
 
 permissions:
   contents: read
@@ -44,3 +55,39 @@ jobs:
           test -f authorized-repo/customer-support/1.0.0/SKILL.md
           test -f authorized-repo/customer-support/1.0.0/APPROVAL.json
           grep -F '"xrayScanStatus": "DONE"' authorized-repo/customer-support/1.0.0/APPROVAL.json
+
+  publish-approved-skill-to-jfrog:
+    name: Publish skill to alex-skills-local and scan with Xray
+    needs: validate-local-promotion-flow
+    if: github.event_name == 'workflow_dispatch' && inputs.publish_to_jfrog
+    runs-on: ubuntu-latest
+    environment: jfrog-skills-publish
+    defaults:
+      run:
+        working-directory: skills-governance-webhook-demo
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up latest JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+
+      - name: Configure the JFrog Platform connection
+        env:
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+        run: |
+          test -n "$JF_URL"
+          test -n "$JF_ACCESS_TOKEN"
+          jf config add github-actions \
+            --url="$JF_URL" \
+            --access-token="$JF_ACCESS_TOKEN" \
+            --interactive=false
+
+      - name: Publish immutable skill bundle and wait for Xray scan
+        run: |
+          jf skills publish development-repo/customer-support \
+            --server-id github-actions \
+            --repo alex-skills-local \
+            --version "${{ inputs.skill_version }}" \
+            --quiet
