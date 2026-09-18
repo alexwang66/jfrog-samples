@@ -122,7 +122,7 @@ jobs:
         if: steps.skills.outputs.has_skills == 'true'
         run: |
           set -euo pipefail
-          if git diff --quiet -- skills-management-flow/authorized; then
+          if [ -z "$(git status --porcelain -- skills-management-flow/authorized)" ]; then
             echo "No authorized skill changes to commit."
             exit 0
           fi

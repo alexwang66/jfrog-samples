@@ -1,7 +1,7 @@
 ---
 name: customer-support
 description: Helps support teams answer product and troubleshooting questions with approved response guidance.
-version: 1.0.0
+version: 1.0.1
 tags:
   - support
   - business-user
