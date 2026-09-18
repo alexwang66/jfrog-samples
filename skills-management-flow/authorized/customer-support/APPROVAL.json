@@ -1,0 +1,12 @@
+{
+  "skill": "customer-support",
+  "version": "1.0.1",
+  "sourcePath": "skills-management-flow/develop/customer-support/SKILL.md",
+  "authorizedPath": "skills-management-flow/authorized/customer-support/SKILL.md",
+  "sourceSha256": "8bd16d07242fb1a9c96c083e49851bfd78b65c5bb125f3967ec55ffa549d9e4f",
+  "jfrogRepository": "alex-skills-local",
+  "approvedBy": "github-actions",
+  "githubRunId": "35360139897",
+  "githubSha": "48def7e261410eef4508dc2d3edfedfd81853fa0",
+  "approvedAt": "2026-09-18T15:04:23Z"
+}
