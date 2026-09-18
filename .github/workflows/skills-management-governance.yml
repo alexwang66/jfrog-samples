@@ -71,12 +71,20 @@ jobs:
       - name: Configure JFrog CLI
         if: steps.skills.outputs.has_skills == 'true'
         env:
-          JF_URL: ${{ secrets.JF_URL }}
-          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_URL: ${{ secrets.JF_URL || vars.JFROG_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN || secrets.ARTIFACTORY_ACCESS_TOKEN }}
         run: |
           set -euo pipefail
-          test -n "$JF_URL"
-          test -n "$JF_ACCESS_TOKEN"
+          if [ -z "${JF_URL:-}" ]; then
+            echo "::error::Missing JFrog URL. Set repo variable JFROG_URL or secret JF_URL."
+            exit 1
+          fi
+
+          if [ -z "${JF_ACCESS_TOKEN:-}" ]; then
+            echo "::error::Missing JFrog access token. Set repo secret ARTIFACTORY_ACCESS_TOKEN or JF_ACCESS_TOKEN."
+            exit 1
+          fi
+
           jf config add skills-registry \
             --url "$JF_URL" \
             --access-token "$JF_ACCESS_TOKEN" \
