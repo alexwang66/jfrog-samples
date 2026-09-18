@@ -1,0 +1,13 @@
+{
+  "name": "skills-governance-webhook-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "publish:local": "node scripts/publish-local.mjs",
+    "pipeline:local": "node scripts/run-local-pipeline.mjs",
+    "send:sample": "node scripts/send-sample-webhook.mjs",
+    "test": "node --test"
+  }
+}

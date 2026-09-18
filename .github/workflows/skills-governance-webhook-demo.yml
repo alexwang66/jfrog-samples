@@ -1,0 +1,46 @@
+name: Validate Skills Governance Webhook Demo
+
+on:
+  push:
+    paths:
+      - 'skills-governance-webhook-demo/**'
+      - '.github/workflows/skills-governance-webhook-demo.yml'
+  pull_request:
+    paths:
+      - 'skills-governance-webhook-demo/**'
+      - '.github/workflows/skills-governance-webhook-demo.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-local-promotion-flow:
+    name: Validate local Xray webhook promotion flow
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills-governance-webhook-demo
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run promotion unit tests
+        run: npm test
+
+      - name: Publish development skill to the local registry fixture
+        run: npm run publish:local
+
+      - name: Process Xray scan-completed webhook and promote approved skill
+        run: npm run pipeline:local
+
+      - name: Verify business-user distribution output
+        run: |
+          test -f authorized-repo/customer-support/1.0.0/SKILL.md
+          test -f authorized-repo/customer-support/1.0.0/APPROVAL.json
+          grep -F '"xrayScanStatus": "DONE"' authorized-repo/customer-support/1.0.0/APPROVAL.json
