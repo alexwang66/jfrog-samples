@@ -24,6 +24,7 @@ jobs:
   publish-scan-and-authorize:
     name: Publish to JFrog, scan, then authorize
     runs-on: ubuntu-latest
+    environment: jfrog-skills-publish
     env:
       JFROG_SKILLS_REPO: alex-skills-local
     steps:
