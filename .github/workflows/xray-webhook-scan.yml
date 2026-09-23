@@ -1,0 +1,108 @@
+name: Xray Webhook Scan
+
+on:
+  push:
+    paths:
+      - "xray-webhook/**"
+      - "skills-sample/**"
+      - ".github/workflows/xray-webhook-scan.yml"
+  workflow_dispatch:
+    inputs:
+      skill_dir:
+        description: "Skill directory to publish (e.g. skills-sample/env-demo-malicious)"
+        required: false
+        default: "skills-sample/env-demo-malicious"
+        type: string
+      skill_version:
+        description: "Skill version (semver, e.g. 1.3.0). Leave empty to auto-generate."
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: xray-webhook-scan-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish-scan-notify:
+    name: Publish to JFrog, scan, query status, send webhook
+    runs-on: ubuntu-latest
+    env:
+      JFROG_SKILLS_REPO: alex-skills-local
+      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL || 'https://webhook.site/2e812807-3362-4dd4-835e-b5c6cecd9aaa' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        with:
+          version: latest
+
+      - name: Show JFrog CLI version
+        run: jf --version
+
+      - name: Resolve skill directory and version
+        id: resolve
+        env:
+          INPUT_SKILL_DIR: ${{ github.event.inputs.skill_dir || '' }}
+          INPUT_SKILL_VERSION: ${{ github.event.inputs.skill_version || '' }}
+        run: |
+          set -euo pipefail
+          skill_dir="${INPUT_SKILL_DIR:-skills-sample/env-demo-malicious}"
+          if [ -n "$INPUT_SKILL_VERSION" ]; then
+            skill_version="$INPUT_SKILL_VERSION"
+          else
+            skill_version="1.0.$((GITHUB_RUN_NUMBER + 100))"
+          fi
+          echo "skill_dir=$skill_dir" >> "$GITHUB_OUTPUT"
+          echo "skill_version=$skill_version" >> "$GITHUB_OUTPUT"
+          echo "Resolved: skill_dir=$skill_dir, skill_version=$skill_version"
+
+      - name: Configure JFrog CLI
+        env:
+          JF_URL: ${{ secrets.JF_URL || vars.JFROG_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN || secrets.RUNTIME_ARTIFACTORY_ACCESS_TOKEN || secrets.ARTIFACTORY_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${JF_URL:-}" ]; then
+            echo "::error::Missing JFrog URL. Set repo variable JFROG_URL or secret JF_URL."
+            exit 1
+          fi
+          if [ -z "${JF_ACCESS_TOKEN:-}" ]; then
+            echo "::error::Missing JFrog access token. Set repo secret JF_ACCESS_TOKEN."
+            exit 1
+          fi
+          jf config add skills-registry \
+            --url "$JF_URL" \
+            --access-token "$JF_ACCESS_TOKEN" \
+            --interactive=false \
+            --overwrite=true
+
+      - name: Publish skill, scan, query status, and send webhook
+        env:
+          JF_BIN: jf
+          JF_SERVER_ID: skills-registry
+          JF_SKILLS_REPO: ${{ env.JFROG_SKILLS_REPO }}
+          WEBHOOK_URL: ${{ env.WEBHOOK_URL }}
+          WEBHOOK_ENABLED: "true"
+          AUTO_DELETE_ON_FAILURE: "true"
+          SKILL_DIR: ${{ steps.resolve.outputs.skill_dir }}
+          SKILL_VERSION: ${{ steps.resolve.outputs.skill_version }}
+        run: |
+          set -euo pipefail
+          bash xray-webhook/run-xray-scan.sh "$SKILL_DIR" "$SKILL_VERSION"
+
+      - name: Upload scan log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-output-v${{ steps.resolve.outputs.skill_version }}
+          path: xray-webhook/scan-output-v${{ steps.resolve.outputs.skill_version }}.log
+          if-no-files-found: warn
+          retention-days: 30
