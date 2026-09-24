@@ -1,3 +1,0 @@
-module NIOTLS {
-    header "/Users/qingwang/Documents/workspace/code/jfrog-sample/swift-sample/.build/arm64-apple-macosx/debug/NIOTLS.build/include/NIOTLS-Swift.h"
-}

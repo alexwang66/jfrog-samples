@@ -46,3 +46,4 @@ build/
 *.pem
 python/dist/
 dotnet-sample/obj/
+swift-sample/.build/
