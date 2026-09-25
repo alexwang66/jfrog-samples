@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------------------
-# Step 3: Attach three evidence records to the application version after QA promotion:
+# Step 3: Attach three evidence records before lifecycle promotion:
 #   1. SLSA provenance   - who built it, from what source, with what tools
 #   2. Unit-test results - test framework attestation
 #   3. Security scan     - Xray results summary
@@ -65,4 +65,4 @@ attach_evidence "${TMP_DIR}/slsa.json"  "https://slsa.dev/provenance/v1"        
 attach_evidence "${TMP_DIR}/tests.json" "https://jfrog.com/evidence/test-results/v1"           "unit-test results"
 attach_evidence "${TMP_DIR}/scan.json"  "https://jfrog.com/evidence/security-scan/v1"          "Xray security scan"
 
-ok "QA-stage evidence attached. Next: scripts/05-approve-and-release.sh"
+ok "Pre-promotion evidence attached. Next: scripts/04-promote.sh"

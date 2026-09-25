@@ -3,10 +3,10 @@
 An end-to-end walkthrough of the JFrog AppTrust lifecycle:
 **build → application version → evidence attachment → multi-stage promotion → final release**.
 
-The sample application is a minimal Node.js Express service (`hello-service`)
-packaged as a Docker image, pushed to Artifactory, sourced into an AppTrust
-application version, decorated with four signed evidence records, and promoted
-stage by stage into PROD.
+The sample application is a minimal nginx service (`hello-service`) that returns
+JSON from `/` and `/healthz`. It is packaged as a Docker image, pushed to
+Artifactory, sourced into an AppTrust application version, decorated with four
+signed evidence records, and promoted stage by stage into PROD.
 
 > References
 > - AppTrust docs: https://jfrog.com/help/r/jfrog-platform-administration-documentation/apptrust
@@ -19,11 +19,8 @@ stage by stage into PROD.
 
 ```
 apptrust-sample/
-├── app/                       # Node.js sample service (real, runnable code)
-│   ├── server.js              # / (greeting), /healthz (health probe)
-│   ├── test/health.test.js    # Unit tests using node:test (built-in)
-│   └── package.json
-├── Dockerfile                 # Multi-stage build on node:20-alpine
+├── Dockerfile                 # Pure nginx image; no Node runtime
+├── nginx.conf                 # JSON responses for / and /healthz
 ├── evidence/                  # 4 Evidence Predicate templates
 │   ├── slsa-provenance.json   # SLSA v1 provenance
 │   ├── unit-tests.json        # Unit-test result summary
@@ -32,13 +29,13 @@ apptrust-sample/
 ├── scripts/                   # Run in order for the full lifecycle
 │   ├── config.sh              # Central config (override every value via env vars)
 │   ├── 00-init.sh             # ping, create app, generate signing key pair
-│   ├── 01-build.sh            # docker build + jf docker push + publish build-info
+│   ├── 01-build.sh            # build/push image + publish JFrog build-info
 │   ├── 02-create-version.sh   # AppTrust version-create from build
 │   ├── 03-attach-evidence.sh  # attach SLSA + tests + security-scan (3 records)
 │   ├── 04-promote.sh          # promote DEV → QA
 │   ├── 05-approve-and-release.sh # QA approval evidence → PROD → release
 │   ├── 06-verify.sh           # verify evidence signatures + query promotion history
-│   ├── 07-create-policy.sh    # Unified Policy that blocks DEV entry gate
+│   ├── 07-create-policy.sh    # Unified Policy that blocks TEST entry gate
 │   ├── 07b-test-policy-block.sh # verify block-then-unblock behavior
 │   ├── 99-cleanup.sh          # delete versions (optionally delete app)
 │   └── run-all.sh             # runs the whole flow in order
@@ -56,7 +53,7 @@ apptrust-sample/
 | `jq` | Validates Evidence Predicate JSON |
 | **JFrog platform** with AppTrust + Evidence enabled | |
 | **Access-token auth for AppTrust** | Basic auth is rejected — use `jf c add --access-token=...` or OIDC |
-| **JFrog Project** | Must exist ahead of time (default: `apptrust-demo`); DEV/QA/PROD stages/environments must be configured on the platform |
+| **JFrog Project** | Must exist ahead of time (default: `alex`); DEV/TEST/QA/PROD stages/environments must be configured on the platform |
 | **Docker repos** | One per stage, defaults follow `<project>-docker-<stage>-local` |
 
 ### One-time platform setup
@@ -86,10 +83,27 @@ jf c use my-apptrust
 
 ### 2. (Optional) override defaults
 ```bash
-export JF_SERVER_ID=my-apptrust
-export JF_PROJECT=apptrust-demo
+export JF_SERVER_ID=solenglatest
+export JF_PROJECT=alex
 export APP_VERSION=1.0.0
+export KEY_ALIAS=hello-service-evidence-key-v2
 ```
+
+For the `solenglatest` demo environment used by this repository:
+
+```bash
+export JF_SERVER_ID=solenglatest
+export JF_PROJECT=alex
+export KEY_ALIAS=hello-service-evidence-key-v2
+export APP_VERSION=2.0.0
+export TEST_VERSION=2.0.1
+```
+
+`01-build.sh` detects the Docker daemon architecture automatically. Set
+`DOCKER_PLATFORM` only when the demonstration requires a different target.
+
+The Dockerfile uses the nginx image cached in
+`solenglatest.jfrog.io/alex-docker/nginx:latest`. It does not install Node.
 
 All overridable variables live in `scripts/config.sh`.
 
@@ -105,11 +119,19 @@ Or step through it:
 ./scripts/00-init.sh              # bootstrap app + signing keys
 ./scripts/01-build.sh             # build & push image + publish build-info
 ./scripts/02-create-version.sh    # create AppTrust version (PRE_RELEASE)
-./scripts/04-promote.sh           # DEV → QA
-./scripts/03-attach-evidence.sh   # attach the 3 QA-stage evidence records
+./scripts/03-attach-evidence.sh   # attach provenance, test, and scan evidence
+./scripts/04-promote.sh           # DEV → TEST → QA
 ./scripts/05-approve-and-release.sh  # QA approval → PROD → RELEASED
-./scripts/06-verify.sh            # verify signatures + query promotion history
+./scripts/06-verify.sh            # verify trusted key and released state
+./scripts/07-create-policy.sh     # ensure the TEST entry security-scan policy
+./scripts/07b-test-policy-block.sh # demonstrate block, attach evidence, retry
 ```
+
+If the requested `APP_VERSION` tag already exists, `01-build.sh` increments the
+SemVer patch component until it finds an available tag. It saves the selected
+version in `.apptrust-version`; subsequent scripts read that file automatically.
+`07b-test-policy-block.sh` also increments the `TEST_VERSION` patch component
+when the requested application version already exists.
 
 ---
 
@@ -126,8 +148,10 @@ the SLSA supply-chain trust anchor. This sample covers four common predicates:
 | `https://jfrog.com/evidence/approval/v1` | Manual approval (QA, security, compliance) | Between stages |
 
 All four are signed with the same ECDSA P-256 key (generated by
-`jf evd generate-key-pair`); the matching public key is uploaded to the
-platform's Trusted Keys so `jf evd verify-evidence` can verify offline.
+`jf evd generate-key-pair`). The default key alias is
+`hello-service-evidence-key-v2`. The matching public key must be uploaded to the
+platform's Trusted Keys, and the local private key must belong to that exact
+public key.
 
 ---
 
@@ -180,7 +204,7 @@ commands if the build lives under a project.
 
 **Q3: Promotion fails because the stage does not exist**
 
-Create the DEV/QA/PROD stages on the platform first (Administration → AppTrust
+Create the DEV/TEST/QA/PROD stages on the platform first (Administration → AppTrust
 → Lifecycle) and map each stage to its Docker repo.
 
 **Q4: Evidence verification fails**
@@ -189,7 +213,9 @@ Create the DEV/QA/PROD stages on the platform first (Administration → AppTrust
 If it still fails, check:
 - `--key-alias` matches on both create and verify
 - The private key file `.keys/evidence.key` has mode 600
-- The Trusted Keys section on the platform lists the expected alias
+- The Trusted Keys section lists `hello-service-evidence-key-v2`
+- The local private key matches the public key stored under that alias; sharing
+  an alias is insufficient when the key pair differs
 
 **Q5: Cleanup**
 

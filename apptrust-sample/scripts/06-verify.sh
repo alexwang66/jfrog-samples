@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------------------
-# Step 6 (optional): Verify all evidence attached to the application version
-# using the ECDSA public key. Uses the OneModel GraphQL API to list the
-# promotion history so you can confirm each stage transition.
+# Step 6: Verify the trusted signing key and final application-version state.
+# Evidence creation already performs server-side signature verification. The
+# current JFrog CLI does not support verify-evidence for application versions,
+# so this step confirms the key remains trusted and the version reached PROD.
 # ------------------------------------------------------------------------------
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,22 +11,21 @@ source "${SCRIPT_DIR}/config.sh"
 
 require jf
 require jq
-require curl
 
-say "Verifying evidence signatures for ${APP_KEY}@${APP_VERSION}"
-jf evd verify-evidence \
-  --server-id "${JF_SERVER_ID}" \
-  --project "${JF_PROJECT}" \
-  --application-key "${APP_KEY}" \
-  --application-version "${APP_VERSION}" \
-  --use-artifactory-keys \
-  || warn "Signature verification returned a non-zero status. Inspect output above."
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "${TMP_DIR}"' EXIT
 
-say "Fetching promotion history via OneModel GraphQL"
-TOKEN="$(jf c export "${JF_SERVER_ID}" | base64 -d | jq -r '.accessToken // empty')"
-URL="$(jf c export "${JF_SERVER_ID}" | base64 -d | jq -r '.url' | sed 's:/$::')"
-[[ -n "${TOKEN}" ]] || die "Server '${JF_SERVER_ID}' has no access token configured"
+say "Checking trusted evidence key ${KEY_ALIAS}"
+jf api --server-id "${JF_SERVER_ID}" \
+  /artifactory/api/security/keys/trusted > "${TMP_DIR}/trusted-keys.json"
 
+jq -e --arg alias "${KEY_ALIAS}" \
+  'any(.keys[]; .alias == $alias)' \
+  "${TMP_DIR}/trusted-keys.json" >/dev/null \
+  || die "Trusted key alias not found: ${KEY_ALIAS}"
+ok "Trusted evidence key is registered"
+
+say "Fetching final application-version state via OneModel GraphQL"
 QUERY=$(cat <<GQL
 {
   applications {
@@ -34,29 +34,28 @@ QUERY=$(cat <<GQL
       status
       releaseStatus
       currentStageName
-      promotions(first: 20) {
-        edges {
-          node {
-            sourceStageName
-            targetStageName
-            status
-            createdBy
-            createdAt
-          }
-        }
-      }
     }
   }
 }
 GQL
 )
 
-RESP="/tmp/apptrust-verify-$$.json"
-curl -s -X POST "${URL}/onemodel/api/v1/graphql" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d "$(jq -n --arg q "${QUERY}" '{query: $q}')" \
-  -o "${RESP}"
+jq -n --arg q "${QUERY}" '{query: $q}' > "${TMP_DIR}/query.json"
+jf api --server-id "${JF_SERVER_ID}" \
+  /onemodel/api/v1/graphql \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  --input "${TMP_DIR}/query.json" > "${TMP_DIR}/response.json"
 
-jq . "${RESP}"
-ok "Verification report saved to ${RESP}"
+jq -e '.errors == null' "${TMP_DIR}/response.json" >/dev/null \
+  || die "OneModel returned GraphQL errors"
+jq -e --arg stage "${STAGE_PROD}" \
+  '.data.applications.getApplicationVersion
+   | .status == "COMPLETED"
+     and .releaseStatus == "RELEASED"
+     and .currentStageName == $stage' \
+  "${TMP_DIR}/response.json" >/dev/null \
+  || die "Application version is not completed and released in ${STAGE_PROD}"
+
+jq '.data.applications.getApplicationVersion' "${TMP_DIR}/response.json"
+ok "Verified ${APP_KEY}@${APP_VERSION}: COMPLETED, RELEASED, ${STAGE_PROD}"
