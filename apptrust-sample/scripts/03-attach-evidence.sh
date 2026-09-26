@@ -4,6 +4,7 @@
 #   1. SLSA provenance   - who built it, from what source, with what tools
 #   2. Unit-test results - test framework attestation
 #   3. Security scan     - Xray results summary
+#   4. SonarQube gate    - code quality gate status and evaluated conditions
 # QA sign-off is attached later before release.
 # All records are signed with the ECDSA key generated in step 0.
 # ------------------------------------------------------------------------------
@@ -44,6 +45,7 @@ render() {
 render "${EVD_DIR}/slsa-provenance.json" "${TMP_DIR}/slsa.json"
 render "${EVD_DIR}/unit-tests.json"      "${TMP_DIR}/tests.json"
 render "${EVD_DIR}/security-scan.json"   "${TMP_DIR}/scan.json"
+render "${EVD_DIR}/sonarqube-quality-gate.json" "${TMP_DIR}/sonarqube.json"
 
 attach_evidence() {
   local predicate="$1" predicate_type="$2" label="$3"
@@ -64,5 +66,6 @@ attach_evidence() {
 attach_evidence "${TMP_DIR}/slsa.json"  "https://slsa.dev/provenance/v1"                       "SLSA provenance v1"
 attach_evidence "${TMP_DIR}/tests.json" "https://jfrog.com/evidence/test-results/v1"           "unit-test results"
 attach_evidence "${TMP_DIR}/scan.json"  "https://jfrog.com/evidence/security-scan/v1"          "Xray security scan"
+attach_evidence "${TMP_DIR}/sonarqube.json" "https://sonarsource.com/quality-gate/v1"           "SonarQube quality gate"
 
 ok "Pre-promotion evidence attached. Next: scripts/04-promote.sh"
