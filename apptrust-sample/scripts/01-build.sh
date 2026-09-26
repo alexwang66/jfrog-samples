@@ -31,13 +31,24 @@ retry() {
 [[ "${APP_VERSION}" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]] \
   || die "APP_VERSION must use numeric SemVer (for example, 2.3.0)"
 
+VERSIONS_FILE="$(mktemp)"
+trap 'rm -f "${VERSIONS_FILE}"' EXIT
+jf api --server-id "${JF_SERVER_ID}" \
+  "/apptrust/api/v1/applications/${APP_KEY}/versions?limit=1000" \
+  > "${VERSIONS_FILE}"
+
 while :; do
   IMAGE_TAG="${APP_VERSION}"
   BUILD_NUMBER="${APP_VERSION}"
   REMOTE_MANIFEST="${DOCKER_REPO_DEV}/${IMAGE_NAME}/${IMAGE_TAG}/manifest.json"
   REMOTE_MANIFEST_COUNT="$(jf rt search "${REMOTE_MANIFEST}" \
     --server-id "${JF_SERVER_ID}" --count)"
-  if [[ "${REMOTE_MANIFEST_COUNT}" == "0" ]]; then
+  APP_VERSION_EXISTS=0
+  if jq -e --arg version "${APP_VERSION}" \
+    'any(.versions[]; .version == $version)' "${VERSIONS_FILE}" >/dev/null; then
+    APP_VERSION_EXISTS=1
+  fi
+  if [[ "${REMOTE_MANIFEST_COUNT}" == "0" && "${APP_VERSION_EXISTS}" == "0" ]]; then
     break
   fi
   IFS=. read -r VERSION_MAJOR VERSION_MINOR VERSION_PATCH <<< "${APP_VERSION}"
@@ -76,7 +87,7 @@ retry 3 5 jf docker login "${REGISTRY_HOST}" --server-id "${JF_SERVER_ID}"
 say "Pushing image"
 PUSH_LOG="$(mktemp)"
 IMAGE_FILE="${PUSH_LOG}.image"
-trap 'rm -f "${PUSH_LOG}" "${IMAGE_FILE}"' EXIT
+trap 'rm -f "${PUSH_LOG}" "${IMAGE_FILE}" "${VERSIONS_FILE}"' EXIT
 retry 3 5 bash -o pipefail -c 'docker push "$1" 2>&1 | tee "$2"' _ "${IMAGE_REF}" "${PUSH_LOG}"
 
 MANIFEST_DIGEST="$(sed -n 's/.*digest: \(sha256:[0-9a-f]\{64\}\).*/\1/p' "${PUSH_LOG}" | tail -n 1)"
