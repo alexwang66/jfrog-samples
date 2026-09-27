@@ -242,107 +242,107 @@ Required repo-level config:
 
 ---
 
-## Appendix: AppTrust 脚本执行记录
+## Appendix: AppTrust Script Execution Report
 
-- 执行日期：2026-09-26
-- JFrog Server ID：`solenglatest`
-- Project：`alex`
-- Application：`hello-service`
-- Application Version：`1.0.5`
+- Execution date: 2026-09-26
+- JFrog Server ID: `solenglatest`
+- Project: `alex`
+- Application: `hello-service`
+- Application Version: `1.0.5`
 
-### 01 - 构建镜像并发布 Build Info
+### 01 - Build Image and Publish Build Info
 
-- 脚本：`scripts/01-build.sh`
-- 结果：成功
-- Docker 镜像：`solenglatest.jfrog.io/alex-docker-dev-local/apptrust-hello-service:1.0.5`
-- Manifest digest：`sha256:64d629bb739db1315e6d337d246c2d55455a3b00830c92c3bad4efda7b80f78f`
-- Build Info：`hello-service-build/1.0.5`
+- Script: `scripts/01-build.sh`
+- Result: Success
+- Docker image: `solenglatest.jfrog.io/alex-docker-dev-local/apptrust-hello-service:1.0.5`
+- Manifest digest: `sha256:64d629bb739db1315e6d337d246c2d55455a3b00830c92c3bad4efda7b80f78f`
+- Build Info: `hello-service-build/1.0.5`
 
 ![01 - Build Info](image-9.png)
 
-### 02 - 创建 Application Version
+### 02 - Create Application Version
 
-- 脚本：`scripts/02-create-version.sh`
-- 结果：成功
-- Application Version：`hello-service@1.0.5`
-- 状态：`COMPLETED`
-- Release 状态：`PRE_RELEASE`
-- Tag：`sample-1.0.5`
+- Script: `scripts/02-create-version.sh`
+- Result: Success
+- Application Version: `hello-service@1.0.5`
+- Status: `COMPLETED`
+- Release status: `PRE_RELEASE`
+- Tag: `sample-1.0.5`
 
 ![02 - Application Version](image-1.png)
 
-### 03 - 附加签名证据
+### 03 - Attach Signed Evidence
 
-- 脚本：`scripts/03-attach-evidence.sh`
-- 结果：成功
-- SLSA provenance v1：已创建并验证
-- Unit-test results：已创建并验证
-- Xray security scan：已创建并验证
+- Script: `scripts/03-attach-evidence.sh`
+- Result: Success
+- SLSA provenance v1: Created and verified
+- Unit-test results: Created and verified
+- Xray security scan: Created and verified
 
 ![03 - Evidence](image-2.png)
 
-### 04 - 推进至 QA
+### 04 - Promote to QA
 
-- 脚本：`scripts/04-promote.sh`
-- 结果：成功
-- DEV entry gate：`pass`
-- DEV → TEST：成功
-- TEST entry gate：`pass`（应用 1 条策略）
-- TEST → QA：成功
-- 当前阶段：`QA`
+- Script: `scripts/04-promote.sh`
+- Result: Success
+- DEV entry gate: `pass`
+- DEV → TEST: Success
+- TEST entry gate: `pass` (1 policy applied)
+- TEST → QA: Success
+- Current stage: `QA`
 
 ![04 - Promotion History](image-3.png)
 
-### 05 - QA 审批并发布到 PROD
+### 05 - Approve in QA and Release to PROD
 
-- 脚本：`scripts/05-approve-and-release.sh`
-- 结果：成功
-- QA approval evidence：已创建并验证
-- QA exit gate：`pass`
-- PROD release gate：`pass`
-- QA → PROD：成功
-- Release 状态：`RELEASED`
+- Script: `scripts/05-approve-and-release.sh`
+- Result: Success
+- QA approval evidence: Created and verified
+- QA exit gate: `pass`
+- PROD release gate: `pass`
+- QA → PROD: Success
+- Release status: `RELEASED`
 
 ![05 - PROD Released](image-4.png)
 
-### 06 - 验证最终状态
+### 06 - Verify Final State
 
-- 脚本：`scripts/06-verify.sh`
-- 结果：成功
-- Trusted key：`hello-service-evidence-key-v2`
-- Version：`1.0.5`
-- Status：`COMPLETED`
-- Release status：`RELEASED`
-- Current stage：`PROD`
+- Script: `scripts/06-verify.sh`
+- Result: Success
+- Trusted key: `hello-service-evidence-key-v2`
+- Version: `1.0.5`
+- Status: `COMPLETED`
+- Release status: `RELEASED`
+- Current stage: `PROD`
 
 ![06 - Final Version State](image-5.png)
 ![06 - Trusted Evidence Key](image-6.png)
 
-### 07 - 创建 TEST Entry Gate 策略
+### 07 - Create TEST Entry Gate Policy
 
-- 脚本：`scripts/07-create-policy.sh`
-- 结果：成功
-- Template：`hello-service-require-security-scan-v2`
-- Template ID：`2103481999393652736`
-- Rule：`hello-service-require-security-scan-rule-v5`
-- Rule ID：`2103482163952975872`
-- Policy：`hello-service-test-entry-must-have-scan`
-- Policy ID：`2103480550460760064`
-- Mode：`block`
-- Gate：`TEST / entry_gate`
+- Script: `scripts/07-create-policy.sh`
+- Result: Success
+- Template: `hello-service-require-security-scan-v2`
+- Template ID: `2103481999393652736`
+- Rule: `hello-service-require-security-scan-rule-v5`
+- Rule ID: `2103482163952975872`
+- Policy: `hello-service-test-entry-must-have-scan`
+- Policy ID: `2103480550460760064`
+- Mode: `block`
+- Gate: `TEST / entry_gate`
 
 ![07 - Unified Policy](image-7.png)
 
-### 07b - 验证策略阻断与放行
+### 07b - Verify Policy Blocking and Unblocking
 
-- 脚本：`scripts/07b-test-policy-block.sh`
-- 结果：成功
-- 测试版本：`hello-service@1.0.6`
-- 初始 evidence：未附加 security-scan evidence
-- 首次 TEST entry gate：`fail`
-- 违反策略：`hello-service-test-entry-must-have-scan`
-- 附加 evidence：`https://jfrog.com/evidence/security-scan/v1`
-- 重试 TEST entry gate：`pass`
-- 最终阶段：`TEST`
+- Script: `scripts/07b-test-policy-block.sh`
+- Result: Success
+- Test version: `hello-service@1.0.6`
+- Initial evidence: No security-scan evidence attached
+- First TEST entry gate: `fail`
+- Violated policy: `hello-service-test-entry-must-have-scan`
+- Attached evidence: `https://jfrog.com/evidence/security-scan/v1`
+- Retried TEST entry gate: `pass`
+- Final stage: `TEST`
 
 ![07b - Policy Block and Pass](image-8.png)
