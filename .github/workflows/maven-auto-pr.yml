@@ -1,0 +1,54 @@
+name: "Maven Frogbot Auto-PR"
+
+on:
+  workflow_dispatch:
+    inputs:
+      component-name:
+        description: "Maven dependency to fix (for example, com.alibaba:fastjson)."
+        required: true
+        type: string
+      affected-version:
+        description: "Currently installed vulnerable version."
+        required: true
+        type: string
+      fix-version:
+        description: "Version to upgrade to."
+        required: true
+        type: string
+      branch-name:
+        description: "Branch to base the fix PR on. Defaults to the repository default branch."
+        required: false
+        type: string
+      commit-hash:
+        description: "Exact commit the scan ran against."
+        required: false
+        type: string
+  repository_dispatch:
+    types: [jfrog-auto-pr]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the scanned revision
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.inputs['commit-hash'] || github.event.client_payload.commit_hash || github.event.inputs['branch-name'] || github.event.client_payload.branch || github.event.repository.default_branch }}
+
+      - name: Create the Maven dependency fix pull request
+        uses: jfrog/frogbot@v3
+        env:
+          JF_URL: ${{ secrets.JF_URL || vars.JFROG_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN || secrets.ARTIFACTORY_ACCESS_TOKEN }}
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          command: auto-pr
+          component-name: ${{ github.event.inputs['component-name'] || github.event.client_payload.component_name }}
+          affected-version: ${{ github.event.inputs['affected-version'] || github.event.client_payload.affected_version }}
+          fix-version: ${{ github.event.inputs['fix-version'] || github.event.client_payload.fix_version }}
+          branch-name: ${{ github.event.inputs['branch-name'] || github.event.client_payload.branch || github.event.repository.default_branch }}
+          commit-hash: ${{ github.event.inputs['commit-hash'] || github.event.client_payload.commit_hash }}

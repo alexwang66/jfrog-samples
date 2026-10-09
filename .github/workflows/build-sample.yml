@@ -108,7 +108,10 @@ jobs:
 
       - name: Publish Maven Build Info
         run: |
-          jf rt build-publish "$BUILD_NAME" "${{ github.run_id }}"
+          jf rt build-publish "$BUILD_NAME" "${{ github.run_id }}" \
+            --server-id "$SERVER_ID" \
+            --collect-git-info \
+            --dot-git-path "$GITHUB_WORKSPACE"
           jf bs "$BUILD_NAME" "${{ github.run_id }}" --fail=false || true
 
       - name: Login To JFrog Docker Registry
