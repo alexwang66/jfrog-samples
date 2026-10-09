@@ -42,8 +42,8 @@ jobs:
       - name: Create the Maven dependency fix pull request
         uses: jfrog/frogbot@v3
         env:
-          JF_URL: ${{ secrets.JF_URL || vars.JFROG_URL }}
-          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN || secrets.ARTIFACTORY_ACCESS_TOKEN }}
+          JF_URL: ${{ vars.JFROG_URL_SOLENG_LATEST }}
+          JF_ACCESS_TOKEN: ${{ secrets.SOLENG_LATEST_TOKEN }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           command: auto-pr

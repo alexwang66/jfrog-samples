@@ -18,10 +18,10 @@
 
 | 类型 | 名称 | 用途 |
 | --- | --- | --- |
-| Repository secret | `JF_URL` | JFrog Platform 根地址，例如 `https://example.jfrog.io` |
-| Repository secret | `JF_ACCESS_TOKEN` | Frogbot 访问 JFrog Platform 的 Token |
+| Repository variable | `JFROG_URL_SOLENG_LATEST` | Auto-PR 使用的 Soleng Latest JFrog Platform 根地址 |
+| Repository secret | `SOLENG_LATEST_TOKEN` | Frogbot 访问 Soleng Latest 的 Token |
 
-工作流也兼容本仓库已有的 `JFROG_URL` Repository Variable 和 `ARTIFACTORY_ACCESS_TOKEN` Repository Secret，但优先使用官方名称 `JF_URL` 和 `JF_ACCESS_TOKEN`。
+工作流将这两个仓库配置映射为 Frogbot 所需的 `JF_URL` 和 `JF_ACCESS_TOKEN` 环境变量，确保 URL 与 Token 来自同一个 JFrog Platform 实例。
 
 不需要创建 `GITHUB_TOKEN` Secret。GitHub 会自动提供该 Token，工作流已声明 `contents: write` 和 `pull-requests: write` 权限。还需在 **Settings > Actions > General** 中启用 **Allow GitHub Actions to create and approve pull requests**。
 
