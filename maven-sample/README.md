@@ -1,9 +1,5 @@
 # Maven-demo
 
-## Auto-PR Demo
-
-GitHub Actions + JFrog Xray/Frogbot v3 的依赖自动修复 PR 示例见 [AUTO_PR.md](AUTO_PR.md)。
-
 ## Prerequisites for Mac Users
 Install Maven 3 and JFrog CLI
 ```sh

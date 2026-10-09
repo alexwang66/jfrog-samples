@@ -39,7 +39,7 @@ jobs:
       id-token: write
 
     env:
-      JFROG_URL: ${{ vars.JFROG_URL_SOLENG_LATEST }}
+      JFROG_URL: ${{ vars.JFROG_URL }}
       IMAGE_REGISTRY: ${{ vars.RUNTIME_JFROG_DOCKER_REGISTRY || 'demo.jfrogchina.com' }}
       IMAGE_TAG: ${{ github.run_number }}-${{ github.sha }}
 
@@ -60,15 +60,15 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         env:
-          JFROG_URL: ${{ vars.JFROG_URL_SOLENG_LATEST }}
+          JFROG_URL: ${{ vars.JFROG_URL }}
         with:
           oidc-provider-name: alexwang-github
 
       - name: Configure JFrog CLI
         run: |
           jf c add "$SERVER_ID" \
-            --url="${{ vars.JFROG_URL_SOLENG_LATEST }}" \
-            --access-token="${{ secrets.SOLENG_LATEST_TOKEN }}" \
+            --url="${{ vars.JFROG_URL }}" \
+            --access-token="${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}" \
             --interactive=false \
             --overwrite=true
           jf c add "$RUNTIME_SERVER_ID" \
@@ -93,25 +93,9 @@ jobs:
       - name: Build Maven Project
         working-directory: ./maven-sample
         run: |
-          set +e
           jf rt mvn clean package \
             --build-name="$BUILD_NAME" \
-            --build-number="${{ github.run_id }}" \
-            2>&1 | tee "$RUNNER_TEMP/maven-build.log"
-          status="${PIPESTATUS[0]}"
-          set -e
-
-          if [[ "$status" -ne 0 ]]; then
-            message="$(grep -E '\[ERROR\]' "$RUNNER_TEMP/maven-build.log" | tail -1 || true)"
-            if [[ -z "$message" ]]; then
-              message="Maven build exited with status $status; inspect the step log."
-            fi
-            message="${message//'%'/'%25'}"
-            message="${message//$'\r'/'%0D'}"
-            message="${message//$'\n'/'%0A'}"
-            echo "::error title=Maven build::$message"
-            exit "$status"
-          fi
+            --build-number="${{ github.run_id }}"
 
       - name: Upload Java Package To Artifactory
         run: |
@@ -124,10 +108,7 @@ jobs:
 
       - name: Publish Maven Build Info
         run: |
-          jf rt build-publish "$BUILD_NAME" "${{ github.run_id }}" \
-            --server-id "$SERVER_ID" \
-            --collect-git-info \
-            --dot-git-path "$GITHUB_WORKSPACE"
+          jf rt build-publish "$BUILD_NAME" "${{ github.run_id }}"
           jf bs "$BUILD_NAME" "${{ github.run_id }}" --fail=false || true
 
       - name: Login To JFrog Docker Registry
@@ -199,9 +180,9 @@ jobs:
         run: |
           IMAGE="$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:$IMAGE_TAG"
           JAVA_PACKAGE_PATH="$MAVEN_DEPLOY_REPO/$MAVEN_GROUP_PATH/$MAVEN_ARTIFACT_ID/$MAVEN_VERSION/$MAVEN_ARTIFACT_ID-$MAVEN_VERSION.war"
-          JAVA_PACKAGE_URL="${{ vars.JFROG_URL_SOLENG_LATEST }}/ui/repos/tree/General/$JAVA_PACKAGE_PATH"
+          JAVA_PACKAGE_URL="${{ vars.JFROG_URL }}/ui/repos/tree/General/$JAVA_PACKAGE_PATH"
           DOCKER_IMAGE_URL="https://$IMAGE_REGISTRY/ui/repos/tree/General/$DOCKER_REPO/$IMAGE_NAME/$IMAGE_TAG"
-          BUILD_INFO_URL="${{ vars.JFROG_URL_SOLENG_LATEST }}/ui/builds/$BUILD_NAME/${{ github.run_id }}"
+          BUILD_INFO_URL="${{ vars.JFROG_URL }}/ui/builds/$BUILD_NAME/${{ github.run_id }}"
           DOCKER_BUILD_INFO_URL="https://$IMAGE_REGISTRY/ui/builds/$DOCKER_BUILD_NAME/${{ github.run_id }}"
           echo "### Runtime Maven Sample" >> "$GITHUB_STEP_SUMMARY"
           echo "- Java Package: [$MAVEN_ARTIFACT_ID-$MAVEN_VERSION.war]($JAVA_PACKAGE_URL)" >> "$GITHUB_STEP_SUMMARY"
