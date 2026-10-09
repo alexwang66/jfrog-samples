@@ -93,9 +93,25 @@ jobs:
       - name: Build Maven Project
         working-directory: ./maven-sample
         run: |
+          set +e
           jf rt mvn clean package \
             --build-name="$BUILD_NAME" \
-            --build-number="${{ github.run_id }}"
+            --build-number="${{ github.run_id }}" \
+            2>&1 | tee "$RUNNER_TEMP/maven-build.log"
+          status="${PIPESTATUS[0]}"
+          set -e
+
+          if [[ "$status" -ne 0 ]]; then
+            message="$(grep -E '\[ERROR\]' "$RUNNER_TEMP/maven-build.log" | tail -1 || true)"
+            if [[ -z "$message" ]]; then
+              message="Maven build exited with status $status; inspect the step log."
+            fi
+            message="${message//'%'/'%25'}"
+            message="${message//$'\r'/'%0D'}"
+            message="${message//$'\n'/'%0A'}"
+            echo "::error title=Maven build::$message"
+            exit "$status"
+          fi
 
       - name: Upload Java Package To Artifactory
         run: |
