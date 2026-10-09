@@ -22,6 +22,7 @@
 | Repository secret | `SOLENG_LATEST_TOKEN` | Frogbot 访问 Soleng Latest 的 Token |
 
 工作流将这两个仓库配置映射为 Frogbot 所需的 `JF_URL` 和 `JF_ACCESS_TOKEN` 环境变量，确保 URL 与 Token 来自同一个 JFrog Platform 实例。
+`Build And Deploy Runtime Sample` 也使用同一组配置发布 Maven 制品和 Build Info，确保 Xray 扫描结果与 Auto-PR 访问的是同一个 Soleng Latest 实例。
 
 不需要创建 `GITHUB_TOKEN` Secret。GitHub 会自动提供该 Token，工作流已声明 `contents: write` 和 `pull-requests: write` 权限。还需在 **Settings > Actions > General** 中启用 **Allow GitHub Actions to create and approve pull requests**。
 
