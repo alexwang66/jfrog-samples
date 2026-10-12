@@ -1,0 +1,144 @@
+name: NPM POC - KEV-Aware Policy Gate
+
+# The KEV gate is a fixed stage of this POC, not an optional extra:
+# npm install -> build info -> Xray component scan -> CISA KEV cross-check.
+# Xray answers "what is vulnerable"; KEV answers "what is being exploited".
+# The gate acts on the intersection and is fail-closed.
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "npm-sample/**"
+      - "scripts/kev-policy/**"
+      - ".github/workflows/npm-kev-poc.yml"
+  workflow_dispatch:
+    inputs:
+      warn_only:
+        description: "Report KEV hits without failing the job"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-kev-poc-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  JF_URL: ${{ vars.JFROG_URL_SOLENG_LATEST || 'https://solenglatest.jfrog.io/' }}
+  JF_SERVER_ID: solenglatest
+  NPM_VIRTUAL_REPO: alex-npm-virtual
+  BUILD_NAME: npm-kev-poc
+  BUILD_NUMBER: ${{ github.run_number }}
+  KEV_CACHE: ${{ github.workspace }}/.kev-cache/known_exploited_vulnerabilities.json
+
+jobs:
+  kev-gate:
+    name: Xray scan + KEV gate
+    runs-on: ubuntu-latest
+    env:
+      JF_ACCESS_TOKEN: ${{ secrets.SOLENG_LATEST_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ env.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.SOLENG_LATEST_TOKEN }}
+
+      - name: Configure JFrog CLI
+        run: |
+          set -euo pipefail
+          if [ -z "${JF_ACCESS_TOKEN:-}" ]; then
+            echo "::error::Missing SOLENG_LATEST_TOKEN repository secret."
+            exit 1
+          fi
+          jf c add "$JF_SERVER_ID" \
+            --url="$JF_URL" \
+            --access-token="$JF_ACCESS_TOKEN" \
+            --interactive=false \
+            --overwrite=true
+          jf c use "$JF_SERVER_ID"
+          jf rt ping --server-id "$JF_SERVER_ID"
+
+      - name: Configure npm to resolve through Artifactory
+        working-directory: ./npm-sample
+        run: |
+          set -euo pipefail
+          jf npmc \
+            --repo-resolve="$NPM_VIRTUAL_REPO" \
+            --server-id-resolve="$JF_SERVER_ID"
+
+      - name: Install dependencies and record build info
+        working-directory: ./npm-sample
+        run: |
+          set -euo pipefail
+          jf npm install \
+            --build-name="$BUILD_NAME" \
+            --build-number="$BUILD_NUMBER"
+
+      - name: Publish build info
+        working-directory: ./npm-sample
+        run: |
+          set -euo pipefail
+          jf rt build-publish "$BUILD_NAME" "$BUILD_NUMBER" \
+            --server-id "$JF_SERVER_ID"
+
+      - name: Resolve components and scan them with Xray
+        id: xray
+        run: |
+          set -euo pipefail
+          python3 scripts/kev-policy/package_lock_to_components.py \
+            npm-sample/package-lock.json > component-details.json
+
+          jf api --server-id "$JF_SERVER_ID" /xray/api/v1/summary/component \
+            -X POST -H "Content-Type: application/json" \
+            --input component-details.json > xray-summary.json
+
+          echo "components=$(python3 -c "import json;print(len(json.load(open('component-details.json'))['component_details']))")" >> "$GITHUB_OUTPUT"
+
+      - name: KEV-aware policy gate
+        if: always()
+        env:
+          WARN_ONLY: ${{ github.event.inputs.warn_only || 'false' }}
+        run: |
+          set -uo pipefail
+          FLAGS=(--xray-json xray-summary.json --kev-cache "$KEV_CACHE" --summary-md "$GITHUB_STEP_SUMMARY")
+
+          if [ ! -s xray-summary.json ]; then
+            echo "::error::Xray produced no component data - failing the gate closed."
+            exit 1
+          fi
+          if [ "$WARN_ONLY" = "true" ]; then
+            FLAGS+=(--no-fail)
+          fi
+
+          python3 scripts/kev-policy/kev_gate.py "${FLAGS[@]}"
+          rc=$?
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::KEV gate blocked the build: a dependency is listed in the CISA KEV catalog."
+          fi
+          exit "$rc"
+
+      - name: Upload scan evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kev-policy-evidence-${{ github.run_number }}
+          path: |
+            xray-summary.json
+            component-details.json
+          if-no-files-found: warn
+          retention-days: 30
