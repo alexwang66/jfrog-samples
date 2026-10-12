@@ -1,0 +1,92 @@
+name: NPM Sample - Install And Publish Build Info
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "npm-sample/**"
+      - ".github/workflows/npm-sample-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-sample-build-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  JF_URL: ${{ vars.JFROG_URL_SOLENG_LATEST || 'https://solenglatest.jfrog.io/' }}
+  JF_SERVER_ID: solenglatest
+  NPM_VIRTUAL_REPO: alex-npm-virtual
+  BUILD_NAME: npm-sample
+  BUILD_NUMBER: ${{ github.run_number }}
+
+jobs:
+  build:
+    name: Install and publish build info
+    runs-on: ubuntu-latest
+    env:
+      JF_ACCESS_TOKEN: ${{ secrets.SOLENG_LATEST_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ env.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.SOLENG_LATEST_TOKEN }}
+
+      - name: Configure JFrog CLI
+        run: |
+          set -euo pipefail
+          if [ -z "${JF_ACCESS_TOKEN:-}" ]; then
+            echo "::error::Missing SOLENG_LATEST_TOKEN repository secret."
+            exit 1
+          fi
+          jf c add "$JF_SERVER_ID" \
+            --url="$JF_URL" \
+            --access-token="$JF_ACCESS_TOKEN" \
+            --interactive=false \
+            --overwrite=true
+          jf c use "$JF_SERVER_ID"
+          jf rt ping --server-id "$JF_SERVER_ID"
+
+      - name: Configure npm to resolve through Artifactory
+        working-directory: ./npm-sample
+        run: |
+          set -euo pipefail
+          jf npmc \
+            --repo-resolve="$NPM_VIRTUAL_REPO" \
+            --server-id-resolve="$JF_SERVER_ID"
+
+      - name: Install dependencies and record build info
+        working-directory: ./npm-sample
+        run: |
+          set -euo pipefail
+          jf npm install \
+            --build-name="$BUILD_NAME" \
+            --build-number="$BUILD_NUMBER"
+
+      - name: Publish build info
+        working-directory: ./npm-sample
+        run: |
+          set -euo pipefail
+          jf rt build-publish "$BUILD_NAME" "$BUILD_NUMBER" \
+            --server-id "$JF_SERVER_ID"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### NPM sample"
+            echo "- Registry: \`$JF_URL/artifactory/api/npm/$NPM_VIRTUAL_REPO\`"
+            echo "- Build info: [$BUILD_NAME/$BUILD_NUMBER]($JF_URL/ui/builds/$BUILD_NAME/$BUILD_NUMBER)"
+          } >> "$GITHUB_STEP_SUMMARY"
