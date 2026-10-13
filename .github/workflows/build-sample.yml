@@ -16,8 +16,7 @@ on:
   workflow_dispatch:
 
 env:
-  SERVER_ID: soleng
-  RUNTIME_SERVER_ID: demo
+  SERVER_ID: demo
   MAVEN_VIRTUAL_REPO: alex-maven-virtual
   MAVEN_DEPLOY_REPO: alex-maven-local
   MAVEN_GROUP_PATH: com/example/jfrog
@@ -36,7 +35,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
 
     env:
       JFROG_URL: ${{ vars.JFROG_URL }}
@@ -61,20 +59,14 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v4
         env:
           JF_URL: ${{ vars.JFROG_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.RUNTIME_ARTIFACTORY_ACCESS_TOKEN }}
         with:
           version: 2.125.0
-          oidc-provider-name: alexwang-github
           custom-server-id: ${{ env.SERVER_ID }}
 
       - name: Configure JFrog CLI
         run: |
           jf rt ping --server-id "$SERVER_ID"
-          jf c add "$RUNTIME_SERVER_ID" \
-            --url="${{ vars.RUNTIME_JFROG_URL || 'https://demo.jfrogchina.com' }}" \
-            --access-token="${{ secrets.RUNTIME_ARTIFACTORY_ACCESS_TOKEN }}" \
-            --interactive=false \
-            --overwrite=true
-          jf rt ping --server-id "$RUNTIME_SERVER_ID"
           jf c use "$SERVER_ID"
 
       - name: Configure Maven With Artifactory
@@ -117,7 +109,7 @@ jobs:
 
       - name: Login To JFrog Docker Registry
         run: |
-          jf docker login "$IMAGE_REGISTRY" --server-id "$RUNTIME_SERVER_ID"
+          jf docker login "$IMAGE_REGISTRY" --server-id "$SERVER_ID"
 
       - name: Build Runtime Image
         run: |
@@ -132,23 +124,23 @@ jobs:
       - name: Scan Runtime Image
         run: |
           IMAGE="$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:$IMAGE_TAG"
-          jf docker scan "$IMAGE" --server-id "$RUNTIME_SERVER_ID"
+          jf docker scan "$IMAGE" --server-id "$SERVER_ID"
 
       - name: Push Runtime Image
         run: |
           IMAGE="$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:$IMAGE_TAG"
           jf docker push "$IMAGE" \
-            --server-id "$RUNTIME_SERVER_ID" \
+            --server-id "$SERVER_ID" \
             --build-name "$DOCKER_BUILD_NAME" \
             --build-number "${{ github.run_id }}"
           jf docker push "$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:latest-amd64" \
-            --server-id "$RUNTIME_SERVER_ID" \
+            --server-id "$SERVER_ID" \
             --build-name "$DOCKER_BUILD_NAME" \
             --build-number "${{ github.run_id }}"
 
       - name: Publish Docker Build Info
         run: |
-          jf rt build-publish "$DOCKER_BUILD_NAME" "${{ github.run_id }}" --server-id "$RUNTIME_SERVER_ID"
+          jf rt build-publish "$DOCKER_BUILD_NAME" "${{ github.run_id }}" --server-id "$SERVER_ID"
 
       - name: Setup Kubectl
         uses: azure/setup-kubectl@v4
