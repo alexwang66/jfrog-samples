@@ -16,7 +16,8 @@ on:
   workflow_dispatch:
 
 env:
-  SERVER_ID: demo
+  SERVER_ID: soleng
+  RUNTIME_SERVER_ID: demo
   MAVEN_VIRTUAL_REPO: alex-maven-virtual
   MAVEN_DEPLOY_REPO: alex-maven-local
   MAVEN_GROUP_PATH: com/example/jfrog
@@ -37,7 +38,7 @@ jobs:
       contents: read
 
     env:
-      JFROG_URL: ${{ vars.JFROG_URL }}
+      JFROG_URL: ${{ vars.JFROG_URL_SOLENG_LATEST }}
       IMAGE_REGISTRY: ${{ vars.RUNTIME_JFROG_DOCKER_REGISTRY || 'demo.jfrogchina.com' }}
       IMAGE_TAG: ${{ github.run_number }}-${{ github.sha }}
 
@@ -58,8 +59,8 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         env:
-          JF_URL: ${{ vars.JFROG_URL }}
-          JF_ACCESS_TOKEN: ${{ secrets.RUNTIME_ARTIFACTORY_ACCESS_TOKEN }}
+          JF_URL: ${{ vars.JFROG_URL_SOLENG_LATEST }}
+          JF_ACCESS_TOKEN: ${{ secrets.SOLENG_LATEST_TOKEN }}
         with:
           version: 2.125.0
           custom-server-id: ${{ env.SERVER_ID }}
@@ -67,6 +68,12 @@ jobs:
       - name: Configure JFrog CLI
         run: |
           jf rt ping --server-id "$SERVER_ID"
+          jf c add "$RUNTIME_SERVER_ID" \
+            --url="${{ vars.RUNTIME_JFROG_URL || 'https://demo.jfrogchina.com' }}" \
+            --access-token="${{ secrets.RUNTIME_ARTIFACTORY_ACCESS_TOKEN }}" \
+            --interactive=false \
+            --overwrite=true
+          jf rt ping --server-id "$RUNTIME_SERVER_ID"
           jf c use "$SERVER_ID"
 
       - name: Configure Maven With Artifactory
@@ -109,7 +116,7 @@ jobs:
 
       - name: Login To JFrog Docker Registry
         run: |
-          jf docker login "$IMAGE_REGISTRY" --server-id "$SERVER_ID"
+          jf docker login "$IMAGE_REGISTRY" --server-id "$RUNTIME_SERVER_ID"
 
       - name: Build Runtime Image
         run: |
@@ -124,23 +131,23 @@ jobs:
       - name: Scan Runtime Image
         run: |
           IMAGE="$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:$IMAGE_TAG"
-          jf docker scan "$IMAGE" --server-id "$SERVER_ID"
+          jf docker scan "$IMAGE" --server-id "$RUNTIME_SERVER_ID"
 
       - name: Push Runtime Image
         run: |
           IMAGE="$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:$IMAGE_TAG"
           jf docker push "$IMAGE" \
-            --server-id "$SERVER_ID" \
+            --server-id "$RUNTIME_SERVER_ID" \
             --build-name "$DOCKER_BUILD_NAME" \
             --build-number "${{ github.run_id }}"
           jf docker push "$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:latest-amd64" \
-            --server-id "$SERVER_ID" \
+            --server-id "$RUNTIME_SERVER_ID" \
             --build-name "$DOCKER_BUILD_NAME" \
             --build-number "${{ github.run_id }}"
 
       - name: Publish Docker Build Info
         run: |
-          jf rt build-publish "$DOCKER_BUILD_NAME" "${{ github.run_id }}" --server-id "$SERVER_ID"
+          jf rt build-publish "$DOCKER_BUILD_NAME" "${{ github.run_id }}" --server-id "$RUNTIME_SERVER_ID"
 
       - name: Setup Kubectl
         uses: azure/setup-kubectl@v4
@@ -176,9 +183,9 @@ jobs:
         run: |
           IMAGE="$IMAGE_REGISTRY/$DOCKER_REPO/$IMAGE_NAME:$IMAGE_TAG"
           JAVA_PACKAGE_PATH="$MAVEN_DEPLOY_REPO/$MAVEN_GROUP_PATH/$MAVEN_ARTIFACT_ID/$MAVEN_VERSION/$MAVEN_ARTIFACT_ID-$MAVEN_VERSION.war"
-          JAVA_PACKAGE_URL="${{ vars.JFROG_URL }}/ui/repos/tree/General/$JAVA_PACKAGE_PATH"
+          JAVA_PACKAGE_URL="${{ vars.JFROG_URL_SOLENG_LATEST }}/ui/repos/tree/General/$JAVA_PACKAGE_PATH"
           DOCKER_IMAGE_URL="https://$IMAGE_REGISTRY/ui/repos/tree/General/$DOCKER_REPO/$IMAGE_NAME/$IMAGE_TAG"
-          BUILD_INFO_URL="${{ vars.JFROG_URL }}/ui/builds/$BUILD_NAME/${{ github.run_id }}"
+          BUILD_INFO_URL="${{ vars.JFROG_URL_SOLENG_LATEST }}/ui/builds/$BUILD_NAME/${{ github.run_id }}"
           DOCKER_BUILD_INFO_URL="https://$IMAGE_REGISTRY/ui/builds/$DOCKER_BUILD_NAME/${{ github.run_id }}"
           echo "### Runtime Maven Sample" >> "$GITHUB_STEP_SUMMARY"
           echo "- Java Package: [$MAVEN_ARTIFACT_ID-$MAVEN_VERSION.war]($JAVA_PACKAGE_URL)" >> "$GITHUB_STEP_SUMMARY"
