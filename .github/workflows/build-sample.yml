@@ -45,10 +45,10 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Java JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -60,40 +60,39 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         env:
-          JFROG_URL: ${{ vars.JFROG_URL }}
+          JF_URL: ${{ vars.JFROG_URL }}
         with:
+          version: 2.125.0
           oidc-provider-name: alexwang-github
+          custom-server-id: ${{ env.SERVER_ID }}
 
       - name: Configure JFrog CLI
         run: |
-          jf c add "$SERVER_ID" \
-            --url="${{ vars.JFROG_URL }}" \
-            --access-token="${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}" \
-            --interactive=false \
-            --overwrite=true
+          jf rt ping --server-id "$SERVER_ID"
           jf c add "$RUNTIME_SERVER_ID" \
             --url="${{ vars.RUNTIME_JFROG_URL || 'https://demo.jfrogchina.com' }}" \
             --access-token="${{ secrets.RUNTIME_ARTIFACTORY_ACCESS_TOKEN }}" \
             --interactive=false \
             --overwrite=true
-          jf c use "$SERVER_ID"
-          jf rt ping --server-id "$SERVER_ID"
           jf rt ping --server-id "$RUNTIME_SERVER_ID"
+          jf c use "$SERVER_ID"
 
       - name: Configure Maven With Artifactory
+        working-directory: ./maven-sample
         run: |
-          jf mvnc \
+          jf mvn-config \
             --repo-resolve-releases="$MAVEN_VIRTUAL_REPO" \
             --repo-resolve-snapshots="$MAVEN_VIRTUAL_REPO" \
-            --repo-deploy-releases="$MAVEN_VIRTUAL_REPO" \
-            --repo-deploy-snapshots="$MAVEN_VIRTUAL_REPO" \
+            --repo-deploy-releases="$MAVEN_DEPLOY_REPO" \
+            --repo-deploy-snapshots="$MAVEN_DEPLOY_REPO" \
             --server-id-resolve="$SERVER_ID" \
-            --server-id-deploy="$SERVER_ID"
+            --server-id-deploy="$SERVER_ID" \
+            --use-wrapper=true
 
       - name: Build Maven Project
         working-directory: ./maven-sample
         run: |
-          jf rt mvn clean package \
+          jf mvnw clean package \
             --build-name="$BUILD_NAME" \
             --build-number="${{ github.run_id }}"
 
@@ -108,8 +107,13 @@ jobs:
 
       - name: Publish Maven Build Info
         run: |
-          jf rt build-publish "$BUILD_NAME" "${{ github.run_id }}"
-          jf bs "$BUILD_NAME" "${{ github.run_id }}" --fail=false || true
+          jf rt build-publish "$BUILD_NAME" "${{ github.run_id }}" \
+            --server-id "$SERVER_ID" \
+            --collect-git-info \
+            --dot-git-path "$GITHUB_WORKSPACE"
+          jf bs "$BUILD_NAME" "${{ github.run_id }}" \
+            --server-id "$SERVER_ID" \
+            --fail=false || true
 
       - name: Login To JFrog Docker Registry
         run: |
