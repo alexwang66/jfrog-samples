@@ -16,7 +16,7 @@ env:
   JF_URL: ${{ vars.JFROG_URL_SOLENG_LATEST || 'https://solenglatest.jfrog.io/' }}
   JF_SERVER_ID: solenglatest
   JFROG_PUB_REPO: pub-samples-local
-  PUB_HOSTED_URL: https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local
+  PUB_HOSTED_URL: https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local/
   BUILD_NAME: flutter-jfrog-pub-sample
   BUILD_NUMBER: ${{ github.run_number }}
   PACKAGE_VERSION: ${{ github.event.inputs.package_version || '0.1.1' }}
