@@ -38,7 +38,7 @@ For the customer workflow, configure the Artifactory Pub endpoint and publish wi
 
 ```bash
 export PUB_HOSTED_URL="https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local"
-flutter pub token add "$PUB_HOSTED_URL" --env-var JF_ACCESS_TOKEN
+dart pub token add "$PUB_HOSTED_URL" --env-var JF_ACCESS_TOKEN
 flutter pub publish
 ```
 

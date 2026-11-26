@@ -16,7 +16,7 @@ env:
   JF_URL: ${{ vars.JFROG_URL_SOLENG_LATEST || 'https://solenglatest.jfrog.io/' }}
   JF_SERVER_ID: solenglatest
   JFROG_PUB_REPO: pub-samples-local
-  PUB_HOSTED_URL: https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local/
+  ARTIFACTORY_PUB_URL: https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local/
   BUILD_NAME: flutter-jfrog-pub-sample
   BUILD_NUMBER: ${{ github.run_number }}
   PACKAGE_VERSION: ${{ github.event.inputs.package_version || '0.1.1' }}
@@ -72,7 +72,7 @@ jobs:
             --interactive=false \
             --overwrite=true
           jf rt ping --server-id "$JF_SERVER_ID"
-          flutter pub token add "$PUB_HOSTED_URL" --env-var JF_ACCESS_TOKEN
+          dart pub token add "$ARTIFACTORY_PUB_URL" --env-var JF_ACCESS_TOKEN
 
       - name: Test package
         working-directory: ./pub-samples
@@ -101,6 +101,6 @@ jobs:
             echo "### Flutter Pub publish"
             echo "- Repository: \`$JFROG_PUB_REPO\`"
             echo "- Version: \`$PACKAGE_VERSION\`"
-            echo "- Hosted URL: \`$PUB_HOSTED_URL\`"
+            echo "- Hosted URL: \`$ARTIFACTORY_PUB_URL\`"
             echo "- Build Info: [$BUILD_NAME/$BUILD_NUMBER]($JF_URL/ui/builds/$BUILD_NAME/$BUILD_NUMBER)"
           } >> "$GITHUB_STEP_SUMMARY"
