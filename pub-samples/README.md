@@ -32,6 +32,18 @@ The generated Pub metadata is available from:
 https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local/api/packages/jfrog_pub_sample
 ```
 
+## Publish with Flutter CLI
+
+For the customer workflow, configure the Artifactory Pub endpoint and publish with Flutter:
+
+```bash
+export PUB_HOSTED_URL="https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local"
+flutter pub token add "$PUB_HOSTED_URL" --env-var JF_ACCESS_TOKEN
+flutter pub publish
+```
+
+The manual GitHub Actions workflow `.github/workflows/flutter-pub-publish.yml` runs the same flow with Flutter 3.50.0.
+
 Environment variables:
 
 - `JFROG_SERVER_ID` (default: `solenglatest`)
