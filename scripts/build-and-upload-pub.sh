@@ -25,7 +25,7 @@ tar -czf "$ARCHIVE" --exclude='.dart_tool' --exclude='build' --exclude='test' --
 jf rt upload "$ARCHIVE" "$PUB_REPO/jfrog_pub_sample/jfrog_pub_sample-$VERSION.tar.gz" \
   --server-id="$SERVER_ID" --build-name="$BUILD_NAME" --build-number="$BUILD_NUMBER" --detailed-summary
 jf rt build-add-git "$BUILD_NAME" "$BUILD_NUMBER" \
-  --server-id="$SERVER_ID" --dot-git-path="$(dirname "$PROJECT_DIR")"
+  "$(dirname "$PROJECT_DIR")" --server-id="$SERVER_ID"
 jf rt build-publish "$BUILD_NAME" "$BUILD_NUMBER" --server-id="$SERVER_ID" --detailed-summary
 
 echo "Published $ARCHIVE to $PUB_REPO as build $BUILD_NAME/$BUILD_NUMBER"
