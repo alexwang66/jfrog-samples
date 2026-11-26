@@ -1,0 +1,92 @@
+name: Pub Sample - Test, Upload, and Publish Build Info
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "pub-samples/**"
+      - "scripts/build-and-upload-pub.sh"
+      - ".github/workflows/pub-sample-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pub-sample-build-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  JF_URL: ${{ vars.JFROG_URL_SOLENG_LATEST || 'https://solenglatest.jfrog.io/' }}
+  JF_SERVER_ID: solenglatest
+  JFROG_PUB_REPO: pub-samples-local
+  BUILD_NAME: jfrog-pub-sample
+  BUILD_NUMBER: ${{ github.run_number }}
+  JFROG_CLI_USER_AGENT: jfrog-samples-github-actions
+
+jobs:
+  build-and-publish:
+    name: Test and publish Pub package
+    runs-on: ubuntu-latest
+    env:
+      JF_ACCESS_TOKEN: ${{ secrets.SOLENG_LATEST_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "3.14.1"
+
+      - name: Set up JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ env.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ env.JF_ACCESS_TOKEN }}
+        with:
+          version: 2.125.0
+
+      - name: Configure JFrog CLI
+        run: |
+          set -euo pipefail
+          if [ -z "${JF_ACCESS_TOKEN:-}" ]; then
+            echo "::error::Missing SOLENG_LATEST_TOKEN repository secret."
+            exit 1
+          fi
+          jf c add "$JF_SERVER_ID" \
+            --url="$JF_URL" \
+            --access-token="$JF_ACCESS_TOKEN" \
+            --interactive=false \
+            --overwrite=true
+          jf c use "$JF_SERVER_ID"
+          jf rt ping --server-id "$JF_SERVER_ID"
+
+      - name: Test Pub package
+        working-directory: ./pub-samples
+        run: |
+          set -euo pipefail
+          dart pub get
+          dart test
+          dart analyze
+          dart pub publish --dry-run
+
+      - name: Build and upload Pub package
+        env:
+          JFROG_SERVER_ID: ${{ env.JF_SERVER_ID }}
+          JFROG_BUILD_NAME: ${{ env.BUILD_NAME }}
+          JFROG_BUILD_NUMBER: ${{ env.BUILD_NUMBER }}
+        run: ./scripts/build-and-upload-pub.sh
+
+      - name: Write GitHub Actions summary
+        if: always()
+        run: |
+          {
+            echo "### Pub sample"
+            echo "- Repository: \`$JFROG_PUB_REPO\`"
+            echo "- Package: \`jfrog_pub_sample-0.1.0.tar.gz\`"
+            echo "- Build Info: [$BUILD_NAME/$BUILD_NUMBER]($JF_URL/ui/builds/$BUILD_NAME/$BUILD_NUMBER)"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,9 @@
+name: jfrog_pub_sample
+description: A small Dart Pub package published to JFrog Artifactory with jf CLI.
+version: 0.1.0
+repository: https://github.com/jfrog/jfrog-samples
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dev_dependencies:
+  test: ^1.25.0

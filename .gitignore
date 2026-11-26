@@ -12,6 +12,8 @@ vulnerable-go-project
 **/node_modules/
 **/package-lock.json
 **/.npmrc
+**/.dart_tool/
+**/pubspec.lock
 *.xlsx
 *.whl
 ### STS ###

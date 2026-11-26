@@ -1,0 +1,4 @@
+repo-template.json
+build/
+.dart_tool/
+pubspec.lock

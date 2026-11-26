@@ -1,0 +1,6 @@
+{
+  "key": "pub-samples-local",
+  "rclass": "local",
+  "packageType": "Pub",
+  "description": "Local Pub repository for the jfrog-samples Pub example"
+}
