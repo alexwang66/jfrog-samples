@@ -2,6 +2,12 @@ name: Flutter Pub Publish To JFrog
 
 on:
   workflow_dispatch:
+    inputs:
+      package_version:
+        description: "Pub package version to publish"
+        required: false
+        default: "0.1.1"
+        type: string
 
 permissions:
   contents: read
@@ -13,6 +19,7 @@ env:
   PUB_HOSTED_URL: https://solenglatest.jfrog.io/artifactory/api/pub/pub-samples-local
   BUILD_NAME: flutter-jfrog-pub-sample
   BUILD_NUMBER: ${{ github.run_number }}
+  PACKAGE_VERSION: ${{ github.event.inputs.package_version || '0.1.1' }}
   JFROG_CLI_USER_AGENT: jfrog-samples-github-actions
 
 jobs:
@@ -42,6 +49,15 @@ jobs:
           JF_ACCESS_TOKEN: ${{ env.JF_ACCESS_TOKEN }}
         with:
           version: 2.125.0
+
+      - name: Set package version
+        run: |
+          set -euo pipefail
+          if [[ ! "$PACKAGE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::PACKAGE_VERSION must be a stable semantic version such as 0.1.1."
+            exit 1
+          fi
+          sed -i -E "s/^version: .*/version: $PACKAGE_VERSION/" pub-samples/pubspec.yaml
 
       - name: Configure JFrog and Flutter Pub authentication
         run: |
@@ -84,6 +100,7 @@ jobs:
           {
             echo "### Flutter Pub publish"
             echo "- Repository: \`$JFROG_PUB_REPO\`"
+            echo "- Version: \`$PACKAGE_VERSION\`"
             echo "- Hosted URL: \`$PUB_HOSTED_URL\`"
             echo "- Build Info: [$BUILD_NAME/$BUILD_NUMBER]($JF_URL/ui/builds/$BUILD_NAME/$BUILD_NUMBER)"
           } >> "$GITHUB_STEP_SUMMARY"
